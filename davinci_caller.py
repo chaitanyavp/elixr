@@ -1,29 +1,18 @@
 import requests
 from firebase import firebase
 
-<<<<<<< HEAD
-api_file = open("api.key", "r")
-api_key = api_file.readline().rstrip("\n")
-api_file.close()
-=======
 
-def iter_customer_transactions():
-    api_file = open("api.key", "r")
-    api_key = api_file.readline().rstrip("\n")
-    api_file.close()
->>>>>>> 9beff72edddaa9e8528168d6ddc0320a255248ab
-
+def iter_customer_transactions(api_key):
     customer_file = open("sample_customer", "r")
     customer_key = customer_file.readline().rstrip("\n")
     customer_file.close()
 
     response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions", headers={'Authorization': api_key})
     response_data = response.json()
-
-<<<<<<< HEAD
-
-#print(response_data["statusCode"])
-#print(response_data["result"])
+    if response_data["statusCode"] == 200:
+        return response_data["result"]
+    else:
+        return None
 
 
 def get_account():
@@ -33,14 +22,14 @@ def get_account():
     return account
 
 
-def get_masked_account(acc):
+def get_masked_account(acc, api_key):
     res = requests.get("https://api.td-davinci.com/api/customers/" + acc, headers ={'Authorization': api_key})
     res_data = res.json()
     data = res_data["result"]
     print(data["maskedRelatedBankAccounts"])
 
 
-def get_income(acc):
+def get_income(acc, api_key):
     res = requests.get("https://api.td-davinci.com/api/customers/" + acc,
                        headers={'Authorization': api_key})
     res_data = res.json()
@@ -48,21 +37,12 @@ def get_income(acc):
     print(data["totalIncome"])
 
 
-def get_bank_amount(acc):
+def get_bank_amount(acc, api_key):
     res = requests.get("https://api.td-davinci.com/api/customers/" + acc + "/accounts", headers={'Authorization': api_key})
     res_data = res.json()
     data = res_data["result"]
     print(data)
     print(data["bankAccount"]["balance"])
-
-
-acc = get_account()
-get_masked_account(acc)
-=======
-    if response_data["statusCode"] == 200:
-        return response_data["result"]
-    else:
-        return None
 
 
 def read_firebase():
@@ -73,5 +53,11 @@ def read_firebase():
 
 
 if __name__ == "__main__":
+    api_file = open("api.key", "r")
+    api_key = api_file.readline().rstrip("\n")
+    api_file.close()
+
+    acc = get_account()
+    get_masked_account(acc, api_key)
+    print(iter_customer_transactions(api_key))
     read_firebase()
->>>>>>> 9beff72edddaa9e8528168d6ddc0320a255248ab
