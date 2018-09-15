@@ -38,12 +38,13 @@ def get_income(acc, api_key):
     print(data["totalIncome"])
 
 
-def get_bank_amount(acc, api_key):
+def get_bank_amounts(acc, api_key):
     res = requests.get("https://api.td-davinci.com/api/customers/" + acc + "/accounts", headers={'Authorization': api_key})
     res_data = res.json()
-    data = res_data["result"]
-    print(data)
-    print(data["bankAccount"]["balance"])
+    data = res_data["result"]["bankAccounts"]
+    num_items = len(data)
+    for i in data:
+        print(i["balance"])
 
 
 def read_firebase():
@@ -65,3 +66,9 @@ if __name__ == "__main__":
     # print(tdf["ym"])
     print(tdf.columns.values.tolist())
     read_firebase()
+
+    # acc = get_account()
+    # get_bank_amounts(acc, api_key)
+    #print(iter_customer_transactions(api_key))
+    #read_firebase()
+
