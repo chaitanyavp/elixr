@@ -54,6 +54,16 @@ def read_firebase():
     print(result)
 
 
+def get_monthly_spending(tdf):
+    tdf["ym"], _ = tdf['originationDateTime'].str.rsplit('-', 1).str
+    months = tdf["ym"].drop_duplicates().values.tolist()
+    monthly_spending = []
+    for month in months:
+        monthly_spending.append({"month":month, "spending": tdf.loc[(tdf["ym"] == month) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
+
+    return monthly_spending
+
+
 if __name__ == "__main__":
     api_file = open("api.key", "r")
     api_key = api_file.readline().rstrip("\n")
@@ -62,13 +72,13 @@ if __name__ == "__main__":
     # acc = get_account()
     # get_masked_account(acc, api_key)
     tdf = get_transaction_df(api_key)
-    # tdf["ym"], _ = tdf['originationDateTime'].str.rsplit('-', 1).str
-    # print(tdf["ym"])
-    print(tdf.columns.values.tolist())
-    read_firebase()
+
+    print(get_monthly_spending(tdf))
+    # print(tdf.columns.values.tolist())
+
+    # read_firebase()
 
     # acc = get_account()
     # get_bank_amounts(acc, api_key)
-    #print(iter_customer_transactions(api_key))
-    #read_firebase()
-
+    # print(iter_customer_transactions(api_key))
+    # read_firebase()
