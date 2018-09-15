@@ -20,10 +20,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent myIntent = new Intent(MainActivity.this, FitnessActivity.class);
-                MainActivity.this.startActivity(myIntent)
+                MainActivity.this.startActivity(myIntent);
                 System.out.println("i touched the fitness card");
             }
         });
     }
-
 }
