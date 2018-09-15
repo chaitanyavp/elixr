@@ -64,6 +64,16 @@ def get_monthly_spending(tdf):
     return monthly_spending
 
 
+def get_yearly_spending(tdf):
+    tdf["y"], _ = tdf['originationDateTime'].str.split('-', 1).str
+    years = tdf["y"].drop_duplicates().values.tolist()
+    years_spending = []
+    for year in years:
+        years_spending.append({"month":year, "spending": tdf.loc[(tdf["y"] == year) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
+
+    return years_spending
+
+
 if __name__ == "__main__":
     api_file = open("api.key", "r")
     api_key = api_file.readline().rstrip("\n")
@@ -72,8 +82,8 @@ if __name__ == "__main__":
     # acc = get_account()
     # get_masked_account(acc, api_key)
     tdf = get_transaction_df(api_key)
+    print(get_yearly_spending(tdf))
 
-    print(get_monthly_spending(tdf))
     # print(tdf.columns.values.tolist())
 
     # read_firebase()
