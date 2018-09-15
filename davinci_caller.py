@@ -61,6 +61,7 @@ if __name__ == "__main__":
     # acc = get_account()
     # get_masked_account(acc, api_key)
     tdf = get_transaction_df(api_key)
+    # tdf["ym"], _ = tdf['originationDateTime'].str.rsplit('-', 1).str
+    # print(tdf["ym"])
     print(tdf.columns.values.tolist())
-    # print(iter_customer_transactions(api_key))
     read_firebase()
