@@ -44,3 +44,7 @@ def get_bank_amount(acc):
     data = res_data["result"]
     print(data)
     print(data["bankAccount"]["balance"])
+
+
+acc = get_account()
+get_masked_account(acc)
