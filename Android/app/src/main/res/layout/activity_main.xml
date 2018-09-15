@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent" android:layout_height="200dp"
+            android:padding="16dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/budgeting_card"
+                android:layout_weight="0.1"
+                android:layout_marginRight="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/icon_budgeting"
+                        android:src="@drawable/piggybank"
+                        android:backgroundTint="@android:color/black"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentTop="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/budgeting_title"
+                        android:text="Budgeting"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/icon_budgeting"
+                        android:textSize="20sp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/fitness_card"
+                android:layout_weight="0.1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/icon_fitness"
+                        android:src="@drawable/weight"
+                        android:backgroundTint="@android:color/black"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentTop="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fitness_title"
+                        android:text="Fitness"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/icon_fitness"
+                        android:textSize="20sp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent" android:layout_height="200dp"
+            android:padding="16dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nutrition_card"
+                android:layout_weight="0.1"
+                android:layout_marginRight="8dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/icon_nutrition"
+                        android:src="@drawable/food"
+                        android:backgroundTint="@android:color/black"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentTop="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nutrition_title"
+                        android:text="Nutrition"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/icon_nutrition"
+                        android:textSize="20sp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/green_card"
+                android:layout_weight="0.1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/icon_green"
+                        android:src="@drawable/green"
+                        android:backgroundTint="@android:color/black"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentTop="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/green_title"
+                        android:text="Fitness"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/icon_green"
+                        android:textSize="20sp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout> <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="200dp"
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/misc_card"
+            android:layout_weight="0.1"
+            android:layout_marginRight="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/icon_misc"
+                    android:src="@drawable/misc"
+                    android:backgroundTint="@android:color/black"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentTop="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/misc_title"
+                    android:text="Misc"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/icon_misc"
+                    android:textSize="20sp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/green_card"
+            android:layout_weight="0.1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/icon_green"
+                    android:src="@drawable/green"
+                    android:backgroundTint="@android:color/black"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentTop="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/green_title"
+                    android:text="Fitness"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/icon_green"
+                    android:textSize="20sp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
