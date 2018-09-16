@@ -44,8 +44,15 @@ def get_bank_amounts(acc, api_key):
     res = requests.get("https://api.td-davinci.com/api/customers/" + acc + "/accounts", headers={'Authorization': api_key})
     res_data = res.json()
     data = res_data["result"]["bankAccounts"]
-    for i in data:
-        print(i["balance"])
+    return data
+
+
+def get_bank_total(acc, api_key):
+    """ Return total amount in bank accounts """
+    total = 0
+    for i in get_bank_amounts(acc, api_key):
+        total += i
+    return total
 
 
 def get_public_transportation():

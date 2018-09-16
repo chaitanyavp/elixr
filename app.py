@@ -82,6 +82,12 @@ def get_rest():
 def get_rec():
     return jsonify({"result": d.get_rec()})
 
+
+@app.route('/get_bank_total', methods=["GET"])
+def get_bank_total():
+    return jsonify({"result": d.get_bank_total(customer_key, api_key)})
+
+
 @app.route('/json', methods=["POST"])
 def json_example():
     json_dict = request.get_json()
