@@ -63,19 +63,18 @@ def total_income():
     return jsonify({"points": d.get_income(customer_key, api_key)})
 
 
-@app.route('/json', methods=["POST"])
-def json_example():
+@app.route('/add_goal', methods=["POST"])
+def add_goal():
     json_dict = request.get_json()
     if json_dict is not None:
-        print(request.mimetype, json_dict['good'], file=sys.stderr)
-        print(type(json_dict['list']), json_dict['list'], file=sys.stderr)
-        return "good"
-    else:
-        return "bad"
+        d.add_firebase_goal(json_dict['text'])
+        # print(request.mimetype, json_dict['good'], file=sys.stderr)
+        # print(type(json_dict['list']), json_dict['list'], file=sys.stderr)
 
 
 if __name__ == "__main__":
     api_key = d.get_api_key()
     customer_key = d.get_customer_key()
     tr_df = d.get_transaction_df(api_key, customer_key)
+    # d.add_firebase_goal("dhuwijdiowajdiows", customer_key)
     app.run("127.0.0.1", "5000")
