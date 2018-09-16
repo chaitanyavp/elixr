@@ -2,6 +2,8 @@ import requests
 from firebase import firebase
 import pandas
 import datetime
+import time
+import sys
 
 
 # get all the transactions for a customer and returns in as a pandas dataframe
@@ -225,22 +227,22 @@ def read_firebase(customer_id):
     steps = int(fb.get('/'+customer_id+"/steps", None))
     return points, steps
 
+
 def add_firebase_goal(text, customer_id):
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
-    fb.post("/" + customer_id + "/tasks")
-    points = int(fb.get('/' + customer_id + "/points", None))
-    steps = int(fb.get('/' + customer_id + "/steps", None))
-    return points, steps
+    ms = time.time() * 1000.0
+    fb.post("/" + customer_id + "/tasks/"+str(ms), text)
 
 
 def get_grocery_list(tdf):
     grocery_store_codes = [5411, 5422, 5451, 5462, 5499]
     grocery_store_categories = {5411:"Supermarket", 5422:"Meats", 5451:"Dairy", 5462:"Bakeries", 5499:"Misc. food"}
+    tdf = tdf.dropna(axis=0, subset=["merchantCategoryCode"])
     grocery_spending = []
     for code in grocery_store_codes:
         category = grocery_store_categories[code]
-        spending = tdf.loc[(tdf["merchantCategoryCode"] == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
+        spending = tdf.loc[(tdf["merchantCategoryCode"].astype(int) == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
         grocery_spending.append({"category":category, "spending":spending})
     return sorted(grocery_spending, key=lambda k: k['spending'], reverse=True)
 
@@ -248,10 +250,11 @@ def get_grocery_list(tdf):
 def get_eatingout_list(tdf):
     eatingout_codes = [5441, 5811, 5812, 5813, 5814, 5921]
     eatingout_categories = {5441:"Candy", 5811:"Catering", 5812:"Restaurants", 5813:"Drinking Places", 5814:"Fast food", 5921:"Alcohol"}
+    tdf = tdf.dropna(axis=0, subset=["merchantCategoryCode"])
     eatingout_spending = []
     for code in eatingout_codes:
         category = eatingout_categories[code]
-        spending = tdf.loc[(tdf["merchantCategoryCode"] == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
+        spending = tdf.loc[(tdf["merchantCategoryCode"].astype(int) == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
         eatingout_spending.append({"category":category, "spending":spending})
     return sorted(eatingout_spending, key=lambda k: k['spending'], reverse=True)
 
