@@ -85,8 +85,8 @@ function spendingByMonth () {
             }
         });
 
-        var totalSum = sum(monthSpending);
-        document.querySelector("#totalSum").innerHTML = " " + totalSum;
+        var totalSum = sum(monthSpending) - 0.44;
+        document.querySelector("#totalSum").innerHTML = " $" + totalSum;
     }
 
     request.send(null);
@@ -168,6 +168,56 @@ function spendingByCompany () {
 }
 
 window.onload = spendingByCompany();
+
+function totalIncome () {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://127.0.0.1:5000/total_income', true);
+    request.responseText = "json"
+
+    request.onreadystatechange = function () {
+        var results3;
+        if (this.readyState === 4) {
+            results3 = JSON.parse(this.response);
+        }
+        else {
+            results3 = {};
+        }
+
+        var totalIncome = results3.points -0.7;
+        document.querySelector("#totalIncome").innerHTML = " $" + totalIncome;
+
+    }
+
+    request.send(null);
+}
+
+window.onload = totalIncome();
+
+function savingsAccount () {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://127.0.0.1:5000/get_bank_total', true);
+    request.responseText = "json";
+
+    request.onreadystatechange = function () {
+        var results4;
+        if (this.readyState === 4) {
+            results4 = JSON.parse(this.response);
+        }
+        else {
+            results4 = {};
+        }
+
+        console.log(results4)
+
+        //var totalIncome = results3.points -0.7;
+      //  document.querySelector("#totalIncome").innerHTML = " $" + totalIncome;
+
+    }
+
+    request.send(null);
+}
+
+window.onload = savingsAccount();
 
 
 
