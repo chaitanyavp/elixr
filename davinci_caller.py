@@ -47,6 +47,81 @@ def get_bank_amounts(acc, api_key):
         print(i["balance"])
 
 
+#get how much a user has spent on transportation
+def get_public_transportation(api_key):
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+
+    response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions",
+                            headers={'Authorization': api_key})
+    response_data = response.json()
+    response_data = response_data["result"]
+    total = 0;
+    for i in response_data:
+        if i['merchantCategoryCode'] in ['4112', '4131', '4111']:
+            if i['currencyAmount'] > 0:
+                total += i['currencyAmount']
+    return total
+
+
+# returns total amount spent on groceries
+def get_groceries(api_key):
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+
+    response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions",
+                            headers={'Authorization': api_key})
+    response_data = response.json()
+    response_data = response_data["result"]
+    total = 0;
+    second_last_month = 0
+    last_month = 0;
+    for i in response_data:
+        if i['merchantCategoryCode'] in ['5411', '5422', '5451', '5462', '5499']:
+            if i['currencyAmount'] > 0:
+                position = i['originationDatTime'].find('T')
+                print(position)
+                if i['originationDateTime'][:T]
+                total += i['currencyAmount']
+    return total
+
+# returns total amount of uneccessary eating
+def get_unnecessary_eating(api_key):
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+
+    response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions",
+                            headers={'Authorization': api_key})
+    response_data = response.json()
+    response_data = response_data["result"]
+    total = 0;
+    for i in response_data:
+        if i['merchantCategoryCode'] in ['5441', '5811', '5812', '5813', '5814', '5921']:
+            if i['currencyAmount'] > 0:
+                total += i['currencyAmount']
+    return total
+
+
+def get_rec(api_key):
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+
+    response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions",
+                            headers={'Authorization': api_key})
+    response_data = response.json()
+    response_data = response_data["result"]
+    total = 0;
+    for i in response_data:
+        if i['merchantCategoryCode'] in ['5941', '5940', '7032', '7941', '7992', '7999']:
+            if i['currencyAmount'] > 0:
+                total += i['currencyAmount']
+    return total
+
+
 def read_firebase():
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
@@ -101,10 +176,13 @@ if __name__ == "__main__":
     api_key = api_file.readline().rstrip("\n")
     api_file.close()
 
+    print(get_groceries(api_key))
+    print(get_unnecessary_eating(api_key))
+
     # acc = get_account()
     # get_masked_account(acc, api_key)
-    tdf = get_transaction_df(api_key)
-    print(get_company_spending(tdf))
+    # tdf = get_transaction_df(api_key)
+    # print(get_company_spending(tdf))
 
     # print(tdf.columns.values.tolist())
 
