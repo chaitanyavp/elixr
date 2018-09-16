@@ -225,6 +225,14 @@ def read_firebase(customer_id):
     steps = int(fb.get('/'+customer_id+"/steps", None))
     return points, steps
 
+def add_firebase_goal(text, customer_id):
+    fb = firebase.FirebaseApplication(
+        'https://elixr-37b8a.firebaseio.com')
+    fb.post("/" + customer_id + "/tasks")
+    points = int(fb.get('/' + customer_id + "/points", None))
+    steps = int(fb.get('/' + customer_id + "/steps", None))
+    return points, steps
+
 
 def get_grocery_list(tdf):
     grocery_store_codes = [5411, 5422, 5451, 5462, 5499]
@@ -234,7 +242,7 @@ def get_grocery_list(tdf):
         category = grocery_store_categories[code]
         spending = tdf.loc[(tdf["merchantCategoryCode"] == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
         grocery_spending.append({"category":category, "spending":spending})
-    return sorted(grocery_spending, key=lambda k: k['spending'], reverersed=True)
+    return sorted(grocery_spending, key=lambda k: k['spending'], reverse=True)
 
 
 def get_eatingout_list(tdf):
@@ -245,7 +253,7 @@ def get_eatingout_list(tdf):
         category = eatingout_categories[code]
         spending = tdf.loc[(tdf["merchantCategoryCode"] == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
         eatingout_spending.append({"category":category, "spending":spending})
-    return sorted(eatingout_spending, key=lambda k: k['spending'], reverersed=True)
+    return sorted(eatingout_spending, key=lambda k: k['spending'], reverse=True)
 
 
 def get_monthly_spending(tdf):
