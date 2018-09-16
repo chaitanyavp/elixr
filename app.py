@@ -48,6 +48,11 @@ def points_steps():
     return jsonify({"points": points, "steps": steps})
 
 
+@app.route('/total_income', methods=["GET"])
+def total_income():
+    return jsonify({"points": d.get_income(customer_key, api_key)})
+
+
 @app.route('/json', methods=["POST"])
 def json_example():
     json_dict = request.get_json()
