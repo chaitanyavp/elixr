@@ -63,6 +63,25 @@ def total_income():
     return jsonify({"points": d.get_income(customer_key, api_key)})
 
 
+@app.route('/get_public_transportation', methods=["GET"])
+def public_transportation():
+    return jsonify({"result": d.get_public_transportation()})
+
+
+@app.route('/get_groceries', methods=["GET"])
+def get_groceries():
+    return jsonify({"result": d.get_groceries()})
+
+
+@app.route('/get_rest', methods=["GET"])
+def get_rest():
+    return jsonify({"result": d.get_rest()})
+
+
+@app.route('/get_rec', methods=["GET"])
+def get_rec():
+    return jsonify({"result": d.get_rec()})
+
 @app.route('/json', methods=["POST"])
 def json_example():
     json_dict = request.get_json()

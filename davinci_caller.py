@@ -48,8 +48,9 @@ def get_bank_amounts(acc, api_key):
         print(i["balance"])
 
 
-def get_public_transportation(api_key):
+def get_public_transportation():
     """ Returns how much was spend on public transportation in the last month """
+    api_key = get_api_key()
     customer_file = open("sample_customer", "r")
     customer_key = customer_file.readline().rstrip("\n")
     customer_file.close()
@@ -79,8 +80,9 @@ def get_public_transportation(api_key):
 
 
 # returns total amount and goals spent on groceries over last two months
-def get_groceries(api_key):
+def get_groceries():
     """ Returns total amount and goals spent on groceries over the last two months """
+    api_key = get_api_key()
     customer_file = open("sample_customer", "r")
     customer_key = customer_file.readline().rstrip("\n")
     customer_file.close()
@@ -121,8 +123,9 @@ def get_groceries(api_key):
     return res_ar
 
 
-def get_rest(api_key):
+def get_rest():
     """ Reutrn amount spent at restaurnats and unhealthy places in the last month """
+    api_key = get_api_key()
     customer_file = open("sample_customer", "r")
     customer_key = customer_file.readline().rstrip("\n")
     customer_file.close()
@@ -162,8 +165,9 @@ def get_rest(api_key):
     return res_ar
 
 
-def get_rec(api_key):
+def get_rec():
     """ Returns the amount spend on recreation in the last month """
+    api_key = get_api_key()
     customer_file = open("sample_customer", "r")
     customer_key = customer_file.readline().rstrip("\n")
     customer_file.close()
@@ -312,9 +316,8 @@ def get_customer_key():
 
 
 if __name__ == "__main__":
-    ap_key = get_api_key()
     customer_key = get_customer_key()
-    print(get_rest(ap_key))
+    print(get_rest())
 
     # acc = get_account()
     # get_masked_account(acc, api_key)
