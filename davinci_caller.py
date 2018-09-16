@@ -136,7 +136,7 @@ def get_monthly_spending(tdf):
     for month in months:
         monthly_spending.append({"month":month, "spending": tdf.loc[(tdf["ym"] == month) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
 
-    return monthly_spending
+    return sorted(monthly_spending, key=lambda k: k['month'])
 
 
 def get_yearly_spending(tdf):
@@ -146,7 +146,7 @@ def get_yearly_spending(tdf):
     for year in years:
         years_spending.append({"year":year, "spending": tdf.loc[(tdf["y"] == year) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
 
-    return years_spending
+    return sorted(years_spending, key=lambda k: k['year'])
 
 
 def get_company_spending(tdf):
@@ -156,8 +156,7 @@ def get_company_spending(tdf):
         merchant_spending.append({"merc": merc, "spending":
             tdf.loc[(tdf["merchantName"] == merc) & (tdf["currencyAmount"] >= 0)][
                 "currencyAmount"].values.sum()})
-    return sorted(merchant_spending, key=lambda k: k['spending'],
-                      reverse=True)
+    return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
 def get_branch_spending(tdf):
@@ -167,7 +166,6 @@ def get_branch_spending(tdf):
         merc_df = tdf.loc[(tdf["merchantId"] == merc) & (tdf["currencyAmount"] >= 0)]
         if len(merc_df)>0:
             merchant_spending.append({"merc":merc_df["merchantName"].values[0], "spending": merc_df["currencyAmount"].values.sum()})
-
     return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
