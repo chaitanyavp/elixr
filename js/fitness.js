@@ -68,20 +68,47 @@ function fitnessLevel () {
 
 
         var ctx = document.getElementById("fitnessData").getContext('2d');
-        var myPieChart = new Chart(ctx,{
-            type: 'pie',
-            data: [{
-                data: stepsArray
-            }],
-            labels: [
-                'Steps Today',
-                'Remaining Steps'
-            ],
-            options: {
-                animation: {
-                    animateRotate: true
+
+        var data = {
+            labels: ["Steps Today", "Remaining Steps"],
+            datasets: [
+                {
+                    data: stepsArray,
+                    backgroundColor: [
+                        "#2E8B57",
+                        "#DC143C"
+                    ],
+                    borderColor: [
+                        "#1D7A46",
+                        "#CB252B"
+                    ],
+                    borderWidth: [1, 1]
+                }
+            ]
+        }
+
+        var options = {
+            responsive: true,
+            title: {
+                display: true,
+                position: "top",
+                fontSize: 18,
+                fontColor: "#111"
+            },
+            legend: {
+                display: true,
+                position: "bottom",
+                labels: {
+                    fontColor: "#333",
+                    fontSize: 16
                 }
             }
+        };
+
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
         });
     }
 
