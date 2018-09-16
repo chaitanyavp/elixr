@@ -1,13 +1,10 @@
 import requests
 from firebase import firebase
 import pandas
+import datetime
 
 
-def get_transaction_df(api_key):
-    customer_file = open("sample_customer", "r")
-    customer_key = customer_file.readline().rstrip("\n")
-    customer_file.close()
-
+def get_transaction_df(api_key, customer_key):
     response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions", headers={'Authorization': api_key})
     response_data = response.json()
     if response_data["statusCode"] == 200:
@@ -81,11 +78,43 @@ def get_groceries(api_key):
     for i in response_data:
         if i['merchantCategoryCode'] in ['5411', '5422', '5451', '5462', '5499']:
             if i['currencyAmount'] > 0:
-                position = i['originationDatTime'].find('T')
-                print(position)
-                if i['originationDateTime'][:position]:
-                    last_month += i['currencyAmount']
+                td = i['originationDateTime']
+                cur_date = datetime.date.today()
+                if td is not None:
+
+
+                    if td > cur_date:
+                        print('1')
+                    else:
+                        print('0')
+
+                #print('today ' + today)
+                #print("trans_date :" + trans_date)
     return total
+
+
+def decrement_month(cur_date):
+    m = cur_date.month
+    if m < 10:
+        m = '0' + str(m)
+    else:
+        m = str(m)
+    cur_date = str(cur_date.year) + '-' + m + '-' + str(cur_date.day)
+    print(cur_date)
+    month = int(cur_date[5:7])
+    prev_month = 0
+    if month == 1:
+        prev_month = 12
+    else:
+        prev_month = month - 1;
+
+    if prev_month < 10:
+        prev_month = '0' + str(prev_month)
+    else:
+        prev_month = str(prev_month)
+    cur_date = cur_date[0:5] + prev_month + cur_date[7:]
+    print(cur_date)
+
 
 # returns total amount of uneccessary eating
 def get_unnecessary_eating(api_key):
@@ -122,11 +151,12 @@ def get_rec(api_key):
     return total
 
 
-def read_firebase():
+def read_firebase(customerID):
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
-    result = fb.get('/users', None)
-    print(result)
+    points = int(fb.get('/'+customerID+"/points", None))
+    steps = int(fb.get('/'+customerID+"/steps", None))
+    return points, steps
 
 
 def get_monthly_spending(tdf):
@@ -176,9 +206,17 @@ def get_api_key():
     api_file.close()
     return api_key
 
+def get_customer_key():
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+    return customer_key
+
 
 if __name__ == "__main__":
     api_key = get_api_key()
+    get_groceries(api_key)
+    customer_key = get_customer_key()
     print(get_groceries(api_key))
     print(get_unnecessary_eating(api_key))
 
