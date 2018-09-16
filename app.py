@@ -1,12 +1,21 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
+from flask_cors import CORS
 import sys
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def hello():
     return "Hello World!"
+
+
+@app.route('/test', methods=["GET"])
+def test():
+    return "very good one"
+
 
 @app.route('/json', methods=["POST"])
 def json_example():
@@ -17,6 +26,7 @@ def json_example():
         return "good"
     else:
         return "bad"
+
 
 if __name__ == "__main__":
     app.run("127.0.0.1", "5000")
