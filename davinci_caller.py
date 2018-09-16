@@ -83,8 +83,8 @@ def get_groceries(api_key):
             if i['currencyAmount'] > 0:
                 position = i['originationDatTime'].find('T')
                 print(position)
-                if i['originationDateTime'][:T]
-                total += i['currencyAmount']
+                if i['originationDateTime'][:position]:
+                    last_month += i['currencyAmount']
     return total
 
 # returns total amount of uneccessary eating
