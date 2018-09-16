@@ -236,7 +236,7 @@ def add_firebase_goal(text, customer_id):
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
     ms = time.time() * 1000.0
-    fb.post("/" + customer_id + "/tasks/"+str(ms)+"/", text)
+    fb.post("/" + customer_id + "/tasks", text)
 
 
 def get_grocery_list(tdf):
