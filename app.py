@@ -65,6 +65,29 @@ def total_income():
 
 @app.route('/add_goal', methods=["POST"])
 def add_goal():
+    pass
+
+@app.route('/get_public_transportation', methods=["GET"])
+def public_transportation():
+    return jsonify({"result": d.get_public_transportation()})
+
+
+@app.route('/get_groceries', methods=["GET"])
+def get_groceries():
+    return jsonify({"result": d.get_groceries()})
+
+
+@app.route('/get_rest', methods=["GET"])
+def get_rest():
+    return jsonify({"result": d.get_rest()})
+
+
+@app.route('/get_rec', methods=["GET"])
+def get_rec():
+    return jsonify({"result": d.get_rec()})
+
+@app.route('/json', methods=["POST"])
+def json_example():
     json_dict = request.get_json()
     if json_dict is not None:
         d.add_firebase_goal(json_dict['text'])
