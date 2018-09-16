@@ -42,6 +42,16 @@ def monthly_spending():
     return jsonify(d.get_monthly_spending(tr_df))
 
 
+@app.route('/grocery_spending', methods=["GET"])
+def grocery_spending():
+    return jsonify(d.get_grocery_list(tr_df))
+
+
+@app.route('/eatingout_spending', methods=["GET"])
+def eatingout_spending():
+    return jsonify(d.get_eatingout_list(tr_df))
+
+
 @app.route('/points_steps', methods=["GET"])
 def points_steps():
     points, steps = d.read_firebase(customer_key)
