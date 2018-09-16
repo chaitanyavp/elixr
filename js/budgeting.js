@@ -85,7 +85,7 @@ function spendingByMonth () {
             }
         });
 
-        var totalSum = sum(monthSpending) - 0.44;
+        var totalSum = Math.round(sum(monthSpending));
         document.querySelector("#totalSum").innerHTML = " $" + totalSum;
     }
 
@@ -183,7 +183,7 @@ function totalIncome () {
             results3 = {};
         }
 
-        var totalIncome = results3.points -0.7;
+        var totalIncome = Math.round(results3.points);
         document.querySelector("#totalIncome").innerHTML = " $" + totalIncome;
 
     }
@@ -206,8 +206,6 @@ function savingsAccount () {
         else {
             results4 = {};
         }
-
-        console.log(results4)
 
         var savings = results4.result;
         var goal = 10000;

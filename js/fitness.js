@@ -53,8 +53,6 @@ function fitnessLevel () {
             results2 = {};
         }
 
-        console.log(results2.steps)
-
         var totalSteps = results2.steps;
         var stepsGoal = 1000;
         var deficit = stepsGoal - totalSteps;
