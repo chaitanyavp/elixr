@@ -17,9 +17,6 @@ function spendingByMonth () {
     request.onreadystatechange = function () {
         var results;
         if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.response);
             results = JSON.parse(this.response);
         }
         else {
@@ -33,8 +30,18 @@ function spendingByMonth () {
             monthSpending[i] = base.spending;
 
         }
-        console.log(months)
-        console.log(monthSpending)
+
+        var monthLen = months.length;
+        var monthSave = (months[monthLen] - months[monthLen-1])/months[monthLen-1];
+
+        var firstStatus = document.querySelector("#monthSpend");
+
+        if (monthSave > 0.05*months[monthLen-1]) {
+            firstStatus.innerHTML = "--Complete";
+        }
+        else {
+            firstStatus.innerHTML = "--Incomplete";
+        }
 
         var ctx = document.getElementById("monthChart").getContext('2d');
         var monthChart = new Chart(ctx, {
@@ -95,9 +102,6 @@ function spendingByCompany () {
     request.onreadystatechange = function () {
         var results2;
         if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.response);
             results2 = JSON.parse(this.response);
         }
         else {
@@ -110,8 +114,6 @@ function spendingByCompany () {
             mercSpending[i] = base2.spending;
             merc[i] = base2.merc;
         }
-        console.log(merc)
-        console.log(mercSpending)
 
         var ctx2 = document.getElementById("companyChart").getContext('2d');
         var companyChart = new Chart(ctx2, {

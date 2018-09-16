@@ -66,7 +66,7 @@ function spendingGroc () {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            max: 100,
+                            max: 600,
                             beginAtZero:true
                         }
                     }]
@@ -103,8 +103,8 @@ function spendingRest () {
         restSpending = [];
         for (var i = 0; i < results2.length; i++){
             var base2 = results2[i];
-            restSpending[i] = base2.category;
-            restStores[i] = base2.spending;
+            restSpending[i] = base2.spending;
+            restStores[i] = base2.category;
         }
         console.log(restSpending)
         console.log(restStores)
@@ -143,7 +143,7 @@ function spendingRest () {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            max: 1200,
+                            max: 600,
                             beginAtZero:true
                         }
                     }]
