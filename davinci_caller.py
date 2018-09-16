@@ -239,6 +239,13 @@ def read_firebase(customer_id):
     return points, steps
 
 
+def get_goals(customer_id):
+    """ Read firebase """
+    fb = firebase.FirebaseApplication(
+        'https://elixr-37b8a.firebaseio.com')
+    return fb.get('/'+customer_id+"/tasks", None).values()
+
+
 def add_firebase_goal(text, customer_id):
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
