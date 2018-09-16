@@ -53,7 +53,7 @@ def get_bank_total(acc, api_key):
     """ Return total amount in bank accounts """
     total = 0
     for i in get_bank_amounts(acc, api_key):
-        total += i
+        total += i['balance']
     return total
 
 
@@ -342,7 +342,6 @@ def get_customer_key():
 
 if __name__ == "__main__":
     customer_key = get_customer_key()
-    print(get_rest())
 
     # acc = get_account()
     # get_masked_account(acc, api_key)
