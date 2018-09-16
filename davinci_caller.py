@@ -159,6 +159,28 @@ def read_firebase(customerID):
     return points, steps
 
 
+def get_grocery_list(tdf):
+    grocery_store_codes = [5411, 5422, 5451, 5462, 5499]
+    grocery_store_categories = {5411:"Supermarket", 5422:"Meats", 5451:"Dairy", 5462:"Bakeries", 5499:"Misc. food"}
+    grocery_spending = []
+    for code in grocery_store_codes:
+        category = grocery_store_categories[code]
+        spending = tdf.loc[(tdf["merchantCategoryCode"] == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
+        grocery_spending.append({"category":category, "spending":spending})
+    return sorted(grocery_spending, key=lambda k: k['spending'], reverersed=True)
+
+
+def get_eatingout_list(tdf):
+    eatingout_codes = [5441, 5811, 5812, 5813, 5814, 5921]
+    eatingout_categories = {5441:"Candy", 5811:"Catering", 5812:"Restaurants", 5813:"Drinking Places", 5814:"Fast food", 5921:"Alcohol"}
+    eatingout_spending = []
+    for code in eatingout_codes:
+        category = eatingout_categories[code]
+        spending = tdf.loc[(tdf["merchantCategoryCode"] == code) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()
+        eatingout_spending.append({"category":category, "spending":spending})
+    return sorted(eatingout_spending, key=lambda k: k['spending'], reverersed=True)
+
+
 def get_monthly_spending(tdf):
     tdf["ym"], _ = tdf['originationDateTime'].str.rsplit('-', 1).str
     months = tdf["ym"].drop_duplicates().values.tolist()
