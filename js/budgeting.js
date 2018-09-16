@@ -209,10 +209,19 @@ function savingsAccount () {
 
         console.log(results4)
 
-        //var totalIncome = results3.points -0.7;
-      //  document.querySelector("#totalIncome").innerHTML = " $" + totalIncome;
+        var savings = results4.result;
+        var goal = 10000;
 
-    }
+        var secondStatus = document.querySelector("#savingsProgress");
+
+        if (savings > goal) {
+            secondStatus.innerHTML = "--Complete";
+        }
+        else {
+            secondStatus.innerHTML = "--Incomplete";
+        }
+
+    };
 
     request.send(null);
 }

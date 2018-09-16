@@ -70,7 +70,7 @@ function spendingGroc () {
         });
 
         var totalSum = sum(grocSpending);
-        document.querySelector("#totalSumGroc").innerHTML = " " + totalSum;
+        document.querySelector("#totalSumGroc").innerHTML = " $" + totalSum;
     }
 
     request.send(null);
@@ -142,7 +142,7 @@ function spendingRest () {
         });
 
         var totalSum = sum(restSpending);
-        document.querySelector("#totalSumRest").innerHTML = " " + totalSum;
+        document.querySelector("#totalSumRest").innerHTML = " $" + totalSum;
     }
 
     request.send(null);
@@ -197,10 +197,10 @@ function getRest () {
         var secondStatus = document.querySelector("#restLess");
 
         if (results3[2] < results3[0]) {
-            secondStatus.innerHTML = "--Incomplete";
+            secondStatus.innerHTML = "--Complete";
         }
         else {
-            secondStatus.innerHTML = "--Complete";
+            secondStatus.innerHTML = "--Incomplete";
         }
 
     };
