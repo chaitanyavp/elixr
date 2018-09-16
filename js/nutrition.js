@@ -17,9 +17,6 @@ function spendingGroc () {
     request.onreadystatechange = function () {
         var results;
         if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.response);
             results = JSON.parse(this.response);
         }
         else {
@@ -33,8 +30,6 @@ function spendingGroc () {
             grocSpending[i] = base.spending;
 
         }
-        console.log(grocStores)
-        console.log(grocSpending)
 
         var ctx = document.getElementById("grocChart").getContext('2d');
         var grocChart = new Chart(ctx, {
@@ -91,9 +86,6 @@ function spendingRest () {
     request.onreadystatechange = function () {
         var results2;
         if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.response);
             results2 = JSON.parse(this.response);
         }
         else {
@@ -106,8 +98,6 @@ function spendingRest () {
             restSpending[i] = base2.spending;
             restStores[i] = base2.category;
         }
-        console.log(restSpending)
-        console.log(restStores)
 
         var ctx2 = document.getElementById("restChart").getContext('2d');
         var restChart = new Chart(ctx2, {
@@ -150,12 +140,75 @@ function spendingRest () {
                 }
             }
         });
+
+        var totalSum = sum(restSpending);
+        document.querySelector("#totalSumRest").innerHTML = " " + totalSum;
     }
 
     request.send(null);
 }
 
 window.onload = spendingRest();
+
+function getGroceries () {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://127.0.0.1:5000/get_groceries', true);
+    request.responseText = "json";
+
+    request.onreadystatechange = function () {
+        var results2;
+        if (this.readyState === 4) {
+            results2 = JSON.parse(this.response);
+        }
+        else {
+            results2 = {};
+        }
+
+        var firstStatus = document.querySelector("#grocMore");
+
+        if (results2[2] > results2[0]) {
+            firstStatus.innerHTML = "--Complete";
+        }
+        else {
+            firstStatus.innerHTML = "--Incomplete";
+        }
+
+    };
+
+    request.send(null);
+}
+
+window.onload = getRest();
+
+function getRest () {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://127.0.0.1:5000/get_rest', true);
+    request.responseText = "json";
+
+    request.onreadystatechange = function () {
+        var results3;
+        if (this.readyState === 4) {
+            results3 = JSON.parse(this.response);
+        }
+        else {
+            results3 = {};
+        }
+
+        var secondStatus = document.querySelector("#restLess");
+
+        if (results3[2] < results3[0]) {
+            secondStatus.innerHTML = "--Incomplete";
+        }
+        else {
+            secondStatus.innerHTML = "--Complete";
+        }
+
+    };
+
+    request.send(null);
+}
+
+window.onload = getGroceries();
 
 
 
