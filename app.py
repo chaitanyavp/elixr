@@ -70,9 +70,9 @@ def add_goal():
         d.add_firebase_goal(json_dict['text'], customer_key)
 
 
-@app.route('/get_goals', methods=["POST"])
+@app.route('/get_goals', methods=["GET"])
 def get_goals():
-    return jsonify(d.get_goals())
+    return jsonify(d.get_goals(customer_key))
 
 
 @app.route('/get_public_transportation', methods=["GET"])
