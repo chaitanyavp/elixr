@@ -65,10 +65,14 @@ def total_income():
 
 @app.route('/add_goal', methods=["POST"])
 def add_goal():
-    pass
     json_dict = request.get_json()
     if json_dict is not None:
         d.add_firebase_goal(json_dict['text'], customer_key)
+
+
+@app.route('/get_goals', methods=["POST"])
+def get_goals():
+    return jsonify(d.get_goals())
 
 
 @app.route('/get_public_transportation', methods=["GET"])
@@ -110,6 +114,7 @@ if __name__ == "__main__":
     api_key = d.get_api_key()
     customer_key = d.get_customer_key()
     tr_df = d.get_transaction_df(api_key, customer_key)
+    print(d.get_goals(customer_key))
     # d.add_firebase_goal("dhuwijdiowajdiows", customer_key)
-    d.add_firebase_goal("dhuwijdiowajdiows", customer_key)
+    # d.add_firebase_goal("dhuwijdiowajdiows", customer_key)
     app.run("127.0.0.1", "5000")
