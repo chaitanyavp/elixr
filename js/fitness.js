@@ -73,12 +73,12 @@ function fitnessLevel () {
                 {
                     data: stepsArray,
                     backgroundColor: [
-                        "#2E8B57",
-                        "#DC143C"
+                        "#8202AC",
+                        "#D891F0"
                     ],
                     borderColor: [
-                        "#1D7A46",
-                        "#CB252B"
+                        "#6E0490",
+                        "#C384D8"
                     ],
                     borderWidth: [1, 1]
                 }
