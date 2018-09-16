@@ -3,11 +3,7 @@ from firebase import firebase
 import pandas
 
 
-def get_transaction_df(api_key):
-    customer_file = open("sample_customer", "r")
-    customer_key = customer_file.readline().rstrip("\n")
-    customer_file.close()
-
+def get_transaction_df(api_key, customer_key):
     response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions", headers={'Authorization': api_key})
     response_data = response.json()
     if response_data["statusCode"] == 200:
@@ -122,11 +118,12 @@ def get_rec(api_key):
     return total
 
 
-def read_firebase():
+def read_firebase(customerID):
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
-    result = fb.get('/users', None)
-    print(result)
+    points = int(fb.get('/'+customerID+"/points", None))
+    steps = int(fb.get('/'+customerID+"/steps", None))
+    return points, steps
 
 
 def get_monthly_spending(tdf):
@@ -176,9 +173,16 @@ def get_api_key():
     api_file.close()
     return api_key
 
+def get_customer_key():
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+    return customer_key
+
 
 if __name__ == "__main__":
     api_key = get_api_key()
+    customer_key = get_customer_key()
     print(get_groceries(api_key))
     print(get_unnecessary_eating(api_key))
 
