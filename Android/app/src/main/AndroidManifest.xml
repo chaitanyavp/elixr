@@ -19,7 +19,8 @@
         <activity
             android:name=".FitnessActivity"
             android:label="@string/title_activity_fitness"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GoalWalkingActivity"></activity>
     </application>
-
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
 </manifest>

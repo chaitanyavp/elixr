@@ -69,9 +69,31 @@ def get_yearly_spending(tdf):
     years = tdf["y"].drop_duplicates().values.tolist()
     years_spending = []
     for year in years:
-        years_spending.append({"month":year, "spending": tdf.loc[(tdf["y"] == year) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
+        years_spending.append({"year":year, "spending": tdf.loc[(tdf["y"] == year) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
 
     return years_spending
+
+
+def get_company_spending(tdf):
+    merchants = tdf["merchantName"].drop_duplicates().values.tolist()
+    merchant_spending = []
+    for merc in merchants:
+        merchant_spending.append({"merc": merc, "spending":
+            tdf.loc[(tdf["merchantName"] == merc) & (tdf["currencyAmount"] >= 0)][
+                "currencyAmount"].values.sum()})
+    return sorted(merchant_spending, key=lambda k: k['spending'],
+                      reverse=True)
+
+
+def get_branch_spending(tdf):
+    merchants = tdf["merchantId"].drop_duplicates().values.tolist()
+    merchant_spending = []
+    for merc in merchants:
+        merc_df = tdf.loc[(tdf["merchantId"] == merc) & (tdf["currencyAmount"] >= 0)]
+        if len(merc_df)>0:
+            merchant_spending.append({"merc":merc_df["merchantName"].values[0], "spending": merc_df["currencyAmount"].values.sum()})
+
+    return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
 if __name__ == "__main__":
@@ -82,7 +104,7 @@ if __name__ == "__main__":
     # acc = get_account()
     # get_masked_account(acc, api_key)
     tdf = get_transaction_df(api_key)
-    print(get_yearly_spending(tdf))
+    print(get_company_spending(tdf))
 
     # print(tdf.columns.values.tolist())
 
