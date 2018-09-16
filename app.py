@@ -68,6 +68,7 @@ def add_goal():
     json_dict = request.get_json()
     if json_dict is not None:
         d.add_firebase_goal(json_dict['text'], customer_key)
+    return jsonify({})
 
 
 @app.route('/get_goals', methods=["GET"])
