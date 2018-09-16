@@ -4,11 +4,7 @@ import pandas
 import datetime
 
 
-def get_transaction_df(api_key):
-    customer_file = open("sample_customer", "r")
-    customer_key = customer_file.readline().rstrip("\n")
-    customer_file.close()
-
+def get_transaction_df(api_key, customer_key):
     response = requests.get("https://api.td-davinci.com/api/customers/" + customer_key + "/transactions", headers={'Authorization': api_key})
     response_data = response.json()
     if response_data["statusCode"] == 200:
@@ -155,11 +151,12 @@ def get_rec(api_key):
     return total
 
 
-def read_firebase():
+def read_firebase(customerID):
     fb = firebase.FirebaseApplication(
         'https://elixr-37b8a.firebaseio.com')
-    result = fb.get('/users', None)
-    print(result)
+    points = int(fb.get('/'+customerID+"/points", None))
+    steps = int(fb.get('/'+customerID+"/steps", None))
+    return points, steps
 
 
 def get_monthly_spending(tdf):
@@ -169,7 +166,7 @@ def get_monthly_spending(tdf):
     for month in months:
         monthly_spending.append({"month":month, "spending": tdf.loc[(tdf["ym"] == month) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
 
-    return monthly_spending
+    return sorted(monthly_spending, key=lambda k: k['month'])
 
 
 def get_yearly_spending(tdf):
@@ -179,18 +176,18 @@ def get_yearly_spending(tdf):
     for year in years:
         years_spending.append({"year":year, "spending": tdf.loc[(tdf["y"] == year) & (tdf["currencyAmount"] >= 0)]["currencyAmount"].values.sum()})
 
-    return years_spending
+    return sorted(years_spending, key=lambda k: k['year'])
 
 
 def get_company_spending(tdf):
     merchants = tdf["merchantName"].drop_duplicates().values.tolist()
     merchant_spending = []
     for merc in merchants:
-        merchant_spending.append({"merc": merc, "spending":
-            tdf.loc[(tdf["merchantName"] == merc) & (tdf["currencyAmount"] >= 0)][
-                "currencyAmount"].values.sum()})
-    return sorted(merchant_spending, key=lambda k: k['spending'],
-                      reverse=True)
+        spending = tdf.loc[(tdf["merchantName"] == merc) & (tdf["currencyAmount"] >= 0)][
+                "currencyAmount"].values.sum()
+        if spending > 0:
+            merchant_spending.append({"merc": merc, "spending":spending})
+    return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
 def get_branch_spending(tdf):
@@ -198,9 +195,8 @@ def get_branch_spending(tdf):
     merchant_spending = []
     for merc in merchants:
         merc_df = tdf.loc[(tdf["merchantId"] == merc) & (tdf["currencyAmount"] >= 0)]
-        if len(merc_df)>0:
+        if len(merc_df) > 0:
             merchant_spending.append({"merc":merc_df["merchantName"].values[0], "spending": merc_df["currencyAmount"].values.sum()})
-
     return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
@@ -210,10 +206,19 @@ def get_api_key():
     api_file.close()
     return api_key
 
+def get_customer_key():
+    customer_file = open("sample_customer", "r")
+    customer_key = customer_file.readline().rstrip("\n")
+    customer_file.close()
+    return customer_key
+
 
 if __name__ == "__main__":
     api_key = get_api_key()
     get_groceries(api_key)
+    customer_key = get_customer_key()
+    print(get_groceries(api_key))
+    print(get_unnecessary_eating(api_key))
 
     # acc = get_account()
     # get_masked_account(acc, api_key)
