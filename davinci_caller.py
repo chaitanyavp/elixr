@@ -153,9 +153,10 @@ def get_company_spending(tdf):
     merchants = tdf["merchantName"].drop_duplicates().values.tolist()
     merchant_spending = []
     for merc in merchants:
-        merchant_spending.append({"merc": merc, "spending":
-            tdf.loc[(tdf["merchantName"] == merc) & (tdf["currencyAmount"] >= 0)][
-                "currencyAmount"].values.sum()})
+        spending = tdf.loc[(tdf["merchantName"] == merc) & (tdf["currencyAmount"] >= 0)][
+                "currencyAmount"].values.sum()
+        if spending > 0:
+            merchant_spending.append({"merc": merc, "spending":spending})
     return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
@@ -164,7 +165,7 @@ def get_branch_spending(tdf):
     merchant_spending = []
     for merc in merchants:
         merc_df = tdf.loc[(tdf["merchantId"] == merc) & (tdf["currencyAmount"] >= 0)]
-        if len(merc_df)>0:
+        if len(merc_df) > 0:
             merchant_spending.append({"merc":merc_df["merchantName"].values[0], "spending": merc_df["currencyAmount"].values.sum()})
     return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
