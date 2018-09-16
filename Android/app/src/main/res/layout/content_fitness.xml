@@ -7,64 +7,144 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".FitnessActivity"
     tools:showIn="@layout/activity_fitness">
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:orientation="vertical">
 
-        <!-- A CardView that contains a TextView -->
-        <android.support.v7.widget.CardView
+        <!-- Walking Goal -->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/walking_card"
+            android:layout_height="210dp"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            card_view:cardCornerRadius="10dp">
+            android:layout_marginBottom="16dp">
 
-            <android.support.constraint.ConstraintLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/walking_card"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:id="@+id/walkingImage"
-                    android:src="@drawable/walking"
-                    android:scaleType="centerCrop"/>
-                <TextView
-                    android:id="@+id/info_text"
-                    android:text = "Walking Goal"
-                    android:textColor="@color/cardText"
-                    android:layout_width="match_parent"
-                    android:textSize="30sp"
-                    android:padding="5dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/walkingImage"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textSize="17sp"
-                    android:padding="5dp"
-                    android:text="20% of goal met"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/walkingImage"
-                    android:id="@+id/goal_percentage_text"
-                    />
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textSize="20sp"
-                    android:padding="5dp"
-                    android:gravity="right"
-                    android:text="400pts"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/walkingImage"
-                    android:id="@+id/point_total"
-                    />
-            </android.support.constraint.ConstraintLayout>
-        </android.support.v7.widget.CardView>
+                android:layout_height="match_parent"
+                card_view:cardCornerRadius="20dp">
 
+                <android.support.constraint.ConstraintLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:id="@+id/walkingImage"
+                        android:src="@drawable/walking"
+                        android:scaleType="centerCrop"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@drawable/alpha_gradient"
+                        />
+                    <TextView
+                        android:id="@+id/info_text_walking"
+                        android:text = "Walking Goal"
+                        android:layout_width="match_parent"
+                        android:textSize="30sp"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/walkingImage"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:textSize="17sp"
+                        android:padding="16dp"
+                        android:text="90% of goal met"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/walkingImage"
+                        android:id="@+id/goal_percentage_text_walking"
+                        />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:textSize="20sp"
+                        android:padding="16dp"
+                        android:gravity="right"
+                        android:text="150pts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/walkingImage"
+                        android:id="@+id/point_total_walking"
+                        />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <!-- Running Goal -->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_height="210dp"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="16dp">
+
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/running_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardCornerRadius="10dp">
+
+                <android.support.constraint.ConstraintLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:id="@+id/runningImage"
+                        android:src="@drawable/running"
+                        android:scaleType="centerCrop"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@drawable/alpha_gradient"/>
+                    <TextView
+                        android:id="@+id/info_text_running"
+                        android:text = "Running Goal"
+                        android:layout_width="match_parent"
+                        android:textSize="30sp"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/runningImage"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:textSize="17sp"
+                        android:padding="16dp"
+                        android:text="20% of goal met"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/runningImage"
+                        android:id="@+id/goal_percentage_text_running"
+                        />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:textSize="20sp"
+                        android:padding="16dp"
+                        android:gravity="right"
+                        android:text="200pts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/runningImage"
+                        android:id="@+id/point_total_running"
+                        />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
