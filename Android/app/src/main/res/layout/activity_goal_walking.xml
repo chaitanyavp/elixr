@@ -6,14 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GoalWalkingActivity"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:backgroundTint="#e6d3c0">
         <View
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:id="@+id/circleShape"
             android:background="@drawable/circle"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/guideline"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
@@ -27,22 +30,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/step_count_text"
-            android:textSize="70sp"
+            android:textSize="80sp"
             android:gravity="center"
             android:text="6100"
+            android:textStyle="bold"
             android:textColor="@color/textOnGreen"
-            app:layout_constraintBottom_toBottomOf="@id/guideline">
-        </TextView>
+            app:layout_constraintBottom_toBottomOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/guideline"/>
       
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/step_goal_text"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:gravity="center"
             android:textColor="@color/textOnGreen"
             android:text="of 10000 steps"
-            app:layout_constraintTop_toBottomOf="@id/guideline"/>
+            android:paddingTop="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step_count_text"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -55,9 +62,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/circleShape"
-            app:layout_constraintBottom_toTopOf="@+id/extra_info_layout"/>
+            app:layout_constraintBottom_toTopOf="@+id/extra_info_layout"
+            />
 
-    
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +77,7 @@
                 android:id="@+id/calories_text"
                 android:textSize="25sp"
                 android:gravity="center"
-                android:textColor="@color/textOnGreen"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="200cal"
                 android:layout_weight="1"/>
             <TextView
@@ -79,7 +86,7 @@
                 android:id="@+id/null_text"
                 android:textSize="25sp"
                 android:gravity="center"
-                android:textColor="@color/textOnGreen"
+                android:textColor="@color/colorPrimary"
                 android:text=""
                 android:layout_weight="1"/>
             <TextView
@@ -88,7 +95,7 @@
                 android:id="@+id/distance_travelled_text"
                 android:textSize="25sp"
                 android:gravity="center"
-                android:textColor="@color/textOnGreen"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="2.3km"
                 android:layout_weight="1"/>
         </LinearLayout>

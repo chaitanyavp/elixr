@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.isaiah.elixr">
 
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +22,10 @@
             android:name=".FitnessActivity"
             android:label="@string/title_activity_fitness"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GoalWalkingActivity"></activity>
+        <activity android:name=".GoalWalkingActivity" />
+        <activity android:name=".NutritionActivity" />
+        <activity android:name=".OtherActivity" />
+        <activity android:name=".BudgetingActivity"></activity>
     </application>
-    <uses-feature android:name="android.hardware.sensor.stepcounter" />
+
 </manifest>

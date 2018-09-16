@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class GoalWalkingActivity extends AppCompatActivity implements SensorEventListener {
 
 
@@ -27,6 +30,13 @@ public class GoalWalkingActivity extends AppCompatActivity implements SensorEven
 
     private int goalStepCount;
     private int stepCount;
+    private int lastDoubleQuartile = 0;
+    private int stepsBetweenAPICalls = 50;
+
+    private String userID = "50fa056a-d0e2-4241-aa39-340538634033_39ff2dc1-e430-4498-a645-155e83e05403";
+
+    // Firebase things
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,8 @@ public class GoalWalkingActivity extends AppCompatActivity implements SensorEven
         } else {
             isSensorPresent = false;
         }
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -58,6 +70,22 @@ public class GoalWalkingActivity extends AppCompatActivity implements SensorEven
         kilometerText.setText(((int)(10*kilometersPerStep * this.stepCount))/10.0+"km");
         calorieCountText.setText((int)(caloriesPerKilometer * kilometersPerStep * stepCount) + "cal");
 
+        int currentDoubleQuartile = this.stepCount / stepsBetweenAPICalls;
+
+        if(currentDoubleQuartile > this.lastDoubleQuartile) {
+            lastDoubleQuartile = currentDoubleQuartile;
+            System.out.println("exceeded double quartile");
+            this.writeToDatabase();
+        }
+    }
+
+    public void writeToDatabase() {
+
+        try {
+            mDatabase.child(userID).child("steps").setValue(stepCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
