@@ -96,11 +96,15 @@ def get_branch_spending(tdf):
     return sorted(merchant_spending, key=lambda k: k['spending'], reverse=True)
 
 
-if __name__ == "__main__":
+def get_api_key():
     api_file = open("api.key", "r")
     api_key = api_file.readline().rstrip("\n")
     api_file.close()
+    return api_key
 
+
+if __name__ == "__main__":
+    api_key = get_api_key()
     # acc = get_account()
     # get_masked_account(acc, api_key)
     tdf = get_transaction_df(api_key)
