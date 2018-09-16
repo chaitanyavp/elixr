@@ -81,7 +81,7 @@ def get_public_transportation():
                     if td > last_month:
                         last_ar.append(i)
 
-    last_total = 0;
+    last_total = 0
     for i in last_ar:
         last_total += i['currencyAmount']
 
@@ -244,6 +244,7 @@ def add_firebase_goal(text, customer_id):
         'https://elixr-37b8a.firebaseio.com')
     ms = time.time() * 1000.0
     fb.post("/" + customer_id + "/tasks/"+str(ms), text)
+    fb.post("/" + customer_id + "/tasks/"+str(ms)+"/", text)
 
 
 def get_grocery_list(tdf):
