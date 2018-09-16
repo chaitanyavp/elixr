@@ -1,3 +1,4 @@
 sample_customer
 .idea/
-api.key__pycache__/
+api.key
+__pycache__/
