@@ -1,6 +1,7 @@
 import requests
 from firebase import firebase
 import pandas
+import datetime
 
 
 def get_transaction_df(api_key):
@@ -81,11 +82,43 @@ def get_groceries(api_key):
     for i in response_data:
         if i['merchantCategoryCode'] in ['5411', '5422', '5451', '5462', '5499']:
             if i['currencyAmount'] > 0:
-                position = i['originationDatTime'].find('T')
-                print(position)
-                if i['originationDateTime'][:position]:
-                    last_month += i['currencyAmount']
+                td = i['originationDateTime']
+                cur_date = datetime.date.today()
+                if td is not None:
+
+
+                    if td > cur_date:
+                        print('1')
+                    else:
+                        print('0')
+
+                #print('today ' + today)
+                #print("trans_date :" + trans_date)
     return total
+
+
+def decrement_month(cur_date):
+    m = cur_date.month
+    if m < 10:
+        m = '0' + str(m)
+    else:
+        m = str(m)
+    cur_date = str(cur_date.year) + '-' + m + '-' + str(cur_date.day)
+    print(cur_date)
+    month = int(cur_date[5:7])
+    prev_month = 0
+    if month == 1:
+        prev_month = 12
+    else:
+        prev_month = month - 1;
+
+    if prev_month < 10:
+        prev_month = '0' + str(prev_month)
+    else:
+        prev_month = str(prev_month)
+    cur_date = cur_date[0:5] + prev_month + cur_date[7:]
+    print(cur_date)
+
 
 # returns total amount of uneccessary eating
 def get_unnecessary_eating(api_key):
@@ -180,8 +213,7 @@ def get_api_key():
 
 if __name__ == "__main__":
     api_key = get_api_key()
-    print(get_groceries(api_key))
-    print(get_unnecessary_eating(api_key))
+    get_groceries(api_key)
 
     # acc = get_account()
     # get_masked_account(acc, api_key)
