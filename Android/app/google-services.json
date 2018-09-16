@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "476799382604",
+    "firebase_url": "https://elixr-37b8a.firebaseio.com",
+    "project_id": "elixr-37b8a",
+    "storage_bucket": "elixr-37b8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476799382604:android:78f419bbf50b56bf",
+        "android_client_info": {
+          "package_name": "com.example.isaiah.elixr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476799382604-15f7qd9d6revoq5d93a26rgeod4ssrfv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.isaiah.elixr",
+            "certificate_hash": "c5a9123a287f33f4c9041cd0b94a9e83cd51456d"
+          }
+        },
+        {
+          "client_id": "476799382604-lbugdfvjmgsdegkvfsov6m4mtedags4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6iRFR8ur6dS25Z85FzUGR9TJ5KVBL6F0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476799382604-lbugdfvjmgsdegkvfsov6m4mtedags4o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
