@@ -7,7 +7,7 @@ These range from ensuring the user has kept up with their investments, to making
 
 Screenshots:
 <p align:"center"><br>
-<img src="https://imgur.com/k9Xfxq4.png" style="float:left;"width="256"> <br><br>
-<img src="https://imgur.com/mIlUwqK.png" style="float:center;"width="256"> <br><br>
-<img src="https://imgur.com/WecKH9h,png" style="float:right;"width="256"><br>
+<img src="https://imgur.com/k9Xfxq4.png" style="float:left;"width="756">
+<img src="https://imgur.com/mIlUwqK.png" style="float:center;"width="756"> <br>
+<img src="https://imgur.com/WecKH9h.png" style="float:right;"width="756"><br>
 </p>
